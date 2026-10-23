@@ -2,6 +2,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app'
+import path from 'node:path'
 
 export default defineConfig((/* ctx */) => {
   return {
@@ -20,7 +21,7 @@ export default defineConfig((/* ctx */) => {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v7',
-      // 'fontawesome-v7',
+      'fontawesome-v7',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -35,6 +36,10 @@ export default defineConfig((/* ctx */) => {
       target: {
         // browser: 'baseline-widely-available',
         // node: 'node22'
+      },
+      defineEnv: {
+        API_URL: process.env.API_URL || 'http://127.0.0.1:3000',
+        API_PORT: process.env.API_PORT || '3000',
       },
 
       // https://v2.quasar.dev/quasar-cli-vite/page-routing-with-vue-router#filename-based-routing
@@ -93,7 +98,7 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Notify', 'Dialog'],
     },
 
     // animations: 'all', // --- includes all animations
@@ -203,6 +208,8 @@ export default defineConfig((/* ctx */) => {
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
+        icon: path.resolve('src-electron/electron-assets/icons/icon.icns'),
+        extraResource: [path.resolve('../api-liz-entrenamiento')],
         // OS X / Mac App Store
         // appBundleId: '',
         // appCategoryType: '',
